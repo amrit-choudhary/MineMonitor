@@ -12,4 +12,6 @@ router.get('/list', user_data_controller.user_list);
 
 router.get('/login', user_data_controller.user_login);
 
+router.post('/login', user_data_controller.user_login_post);
+
 module.exports = router;
