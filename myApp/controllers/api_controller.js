@@ -38,3 +38,14 @@ exports.get_all_users = function(req, res){
             }
         });
 }
+
+exports.get_service_time = function(req, res){
+    Data_Data.find({})
+    .exec(function(err, list_data){
+        if(err){
+            console.log(err);
+        }else{
+            res.render('analysis2', {title: 'Analysis', dataExt: JSON.stringify(list_data)});
+        }
+    });
+}
