@@ -19,10 +19,39 @@ exports.user_login_post = function (req, res, next) {
                 if (found_user.password == req.body.password) {
                     res.send("login");
                 } else {
-                    res.render('login_form', { title: 'Login', error: 'wrong pass'});
+                    res.render('login_form', { title: 'Login', error: 'wrong pass' });
                 }
             } else {
-                res.render('login_form', { title: 'Login', error: 'cant find user'});
+                res.render('login_form', { title: 'Login', error: 'cant find user' });
+            }
+        });
+}
+
+exports.user_register = function (req, res) {
+    res.render('register_form', { title: 'Register' });
+}
+
+exports.user_register_post = function (req, res) {
+    User_Data.findOne({ 'username': req.body.username })
+        .exec(function (err, found_user) {
+            if (found_user) {
+                res.render('register_form', {title: 'Register', error: 'username exits'});
+            } else {
+                var newUser = new User_Data({
+                    username: req.body.username,
+                    password: req.body.password,
+                    level: req.body.level,
+                    first_name: req.body.level,
+                    last_name: req.body.level
+                });
+
+                newUser.save(function(err){
+                    if(err){
+                        res.send('cant register');
+                    }else{
+                        res.send('Sucessfully registered');
+                    }
+                })
             }
         });
 }

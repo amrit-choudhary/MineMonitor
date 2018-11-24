@@ -14,4 +14,8 @@ router.get('/login', user_data_controller.user_login);
 
 router.post('/login', user_data_controller.user_login_post);
 
+router.get('/register', user_data_controller.user_register);
+
+router.post('/register', user_data_controller.user_register_post);
+
 module.exports = router;

@@ -1,0 +1,30 @@
+head
+    link(rel='stylesheet', href='/stylesheets/style.css')
+
+h1= title 
+
+form(method='POST' action='')
+    h2= Register
+    div.form-group
+        label(for='username') Username: 
+        br
+        input#username.form-control(type='text', placeholder='Username' name='username')
+    div.form-group  
+        label(for='password') Password: 
+        br     
+        input#password.form-control(type='password', placeholder='Password' name='password')
+    div.form-group
+        label(for='level') Level: 
+        br
+        input#level.form-control(type='number', placeholder='1', name='level')
+    div.form-group
+        label(for='first_name') First Name: 
+        br
+        input#first_name.form-control(type='text', placeholder='first name', name='first_name')    
+    div.form-group
+        label(for='last_name') Last Name: 
+        br
+        input#last_name.form-control(type='text', placeholder='last name', name='last_name')
+    button.btn.btn-primary(type='submit') Register
+
+p= error

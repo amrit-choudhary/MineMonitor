@@ -1,13 +1,18 @@
+head
+    link(rel='stylesheet', href='/stylesheets/style.css')
+
 h1= title 
 
 form(method='POST' action='')
     h2= Login
     div.form-group
         label(for='username') Username:
+        br
         input#username.form-control(type='text', placeholder='Username' name='username')
     div.form-group  
         label(for='password') Password:        
+        br
         input#password.form-control(type='password', placeholder='Password' name='password')
-    button.btn.btn-primary(type='submit') Submit
+    button.btn.btn-primary(type='submit') Login
 
 p= error
