@@ -7,7 +7,10 @@ var DataSchema = new Schema({
     id: Number,
     param1: Number,
     param2: Number,
-    param3: Number
+    param3: Number,
+    param4: String,
+    param5: String,
+    param6: String
 });
 
 module.exports = mongoose.model('DataModel', DataSchema);

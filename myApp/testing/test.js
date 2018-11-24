@@ -1,6 +1,6 @@
 
 var async = require('async');
-var user_data = require('./models/user_data');
+var user_data = require('../models/user_data');
 
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://127.0.0.1/user_list', { useNewUrlParser: true });
