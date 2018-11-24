@@ -17,6 +17,7 @@ exports.user_login_post = function (req, res, next) {
         .exec(function (err, found_user) {
             if (found_user) {
                 if (found_user.password == req.body.password) {
+                    res.cookie('username', req.body.username);
                     res.send("login");
                 } else {
                     res.render('login_form', { title: 'Login', error: 'wrong pass' });
@@ -41,8 +42,8 @@ exports.user_register_post = function (req, res) {
                     username: req.body.username,
                     password: req.body.password,
                     level: req.body.level,
-                    first_name: req.body.level,
-                    last_name: req.body.level
+                    first_name: req.body.first_name,
+                    last_name: req.body.last_name
                 });
 
                 newUser.save(function(err){

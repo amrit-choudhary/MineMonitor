@@ -1,4 +1,5 @@
 var Data_Data = require('../models/data_data');
+var User_Data = require('../models/user_data');
 
 var asysc = require('async');
 
@@ -25,4 +26,15 @@ exports.data_save_post = function (req, res) {
             res.send('data saved');
         }
     });
+}
+
+exports.get_all_users = function(req, res){
+    User_Data.find({})
+        .exec(function(err, list_users){
+            if(err){
+                console.log(err);
+            }else{
+                res.render('analysis', {title: 'Analysis', dataExt: JSON.stringify(list_users)});
+            }
+        });
 }
