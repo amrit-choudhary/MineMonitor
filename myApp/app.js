@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var favicon = require('serve-favicon');
 var bodyParser = require('body-parser');
+var compression = require('compression');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -16,6 +17,8 @@ var analysisRouter = require('./routes/analysis');
 var mongoose = require('mongoose');
 
 var app = express();
+
+app.use(compression());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -52,6 +55,7 @@ app.use(function (err, req, res, next) {
 });
 
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://127.0.0.1/user_list', { useNewUrlParser: true });
+var mongoDB = process.env.MONGODB_URI || 'mongodb://127.0.0.1/user_list';
+mongoose.connect(mongoDB, { useNewUrlParser: true });
 
 module.exports = app;
