@@ -1,0 +1,44 @@
+html
+  head
+    script(type='text/javascript', src='https://www.gstatic.com/charts/loader.js')
+    script(type='text/javascript').
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(repeatFetch);
+
+      function repeatFetch(){
+          getData();
+          window.setInterval(function(){
+                getData();}, 6000);
+      }
+
+      function getData(){
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    var myArr = JSON.parse(this.responseText);
+                    drawChart(myArr);
+                }
+            };
+            xmlhttp.open("GET", "/api/getManualData", true);
+            xmlhttp.send()
+      }
+
+
+      function drawChart(arr) {
+          var dataExtFinal = [['index', 'value']];
+          
+          for(i = 0; i < arr.length; i++){
+              dataExtFinal.push(['', arr[i].value]);
+          }
+          
+          var data = google.visualization.arrayToDataTable(dataExtFinal);
+          var options = {
+            title: 'Manual Value',
+            curveType: 'function',
+            legend: { position: 'bottom' }
+      };
+      var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+      chart.draw(data, options);
+      }
+  body
+    #curve_chart(style='width: 900px; height: 500px')

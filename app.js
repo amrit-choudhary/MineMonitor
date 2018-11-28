@@ -13,6 +13,7 @@ var aboutRouter = require('./routes/about');
 var apiRouter = require('./routes/api');
 var logsRouter = require('./routes/logs');
 var analysisRouter = require('./routes/analysis');
+var viewRouter = require('./routes/view');
 
 var mongoose = require('mongoose');
 
@@ -37,7 +38,7 @@ app.use('/about', aboutRouter);
 app.use('/api', apiRouter);
 app.use('/logs', logsRouter);
 app.use('/analysis', analysisRouter);
-
+app.use('/view', viewRouter);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
