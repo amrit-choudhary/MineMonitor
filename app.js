@@ -55,7 +55,7 @@ app.use(function (err, req, res, next) {
 });
 
 var mongoose = require('mongoose');
-var mongoDB = process.env.MONGODB_URI;
+var mongoDB = process.env.MONGODB_URI || 'mongodb://127.0.0.1/user_list';
 mongoose.connect(mongoDB, { useNewUrlParser: true });
 
 module.exports = app;

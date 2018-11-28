@@ -1,4 +1,5 @@
 var Data_Data = require('../models/data_data');
+var Sensor_Data = require('../models/sensor_data');
 var User_Data = require('../models/user_data');
 
 var asysc = require('async');
@@ -28,24 +29,40 @@ exports.data_save_post = function (req, res) {
     });
 }
 
-exports.get_all_users = function(req, res){
+exports.get_all_users = function (req, res) {
     User_Data.find({})
-        .exec(function(err, list_users){
-            if(err){
+        .exec(function (err, list_users) {
+            if (err) {
                 console.log(err);
-            }else{
-                res.render('analysis', {title: 'Analysis', dataExt: JSON.stringify(list_users)});
+            } else {
+                res.render('analysis', { title: 'Analysis', dataExt: JSON.stringify(list_users) });
             }
         });
 }
 
-exports.get_service_time = function(req, res){
+exports.get_service_time = function (req, res) {
     Data_Data.find({})
-    .exec(function(err, list_data){
-        if(err){
-            console.log(err);
-        }else{
-            res.render('analysis2', {title: 'Analysis', dataExt: JSON.stringify(list_data)});
+        .exec(function (err, list_data) {
+            if (err) {
+                console.log(err);
+            } else {
+                res.render('analysis2', { title: 'Analysis', dataExt: JSON.stringify(list_data) });
+            }
+        });
+}
+
+exports.sensor_data_save_post = function (req, res) {
+    var sensor_data = new Sensor_Data({
+        timestamp: req.body.timestamp,
+        sensorName: req.body.sensorName,
+        value: req.body.value
+    });
+
+    sensor_data.save(function (err) {
+        if (err) {
+            res.send('data not saved');
+        } else {
+            res.send('data saved');
         }
     });
 }
